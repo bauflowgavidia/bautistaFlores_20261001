@@ -1,6 +1,6 @@
 <?php
-require("classes/com.class.php");
-require("classes/validaciones.class.php")
+require("classes/conn.class.php");
+require("classes/validaciones.inc.php");
 
 class Estudiante{
     public $idEstudiante;
@@ -16,37 +16,37 @@ class Estudiante{
     }
 
     public function setIdEstudiante($idEstudiante){
-        $this->idEstudiante = intval($idEstudiante)
+        $this->idEstudiante = intval($idEstudiante);
     }
 
     public function getIdEstudiante(){
-        return intval($this->idEstudiante)
+        return intval($this->idEstudiante);
     }
 
 
 
      public function setFechaNacimiento($fechaNacimiento){
-        $this->fechaNacEstudiante = $fechaNacimiento
+        $this->fechaNacEstudiante = $fechaNacimiento;
     }
 
     public function getFechaNacimiento(){
-        return $this->fechaNacEstudiante
+        return $this->fechaNacEstudiante;
     }
 
 
     
      public function setIdGenero($idGenero){
-        $this->idGenero = $idGenero
+        $this->idGenero = $idGenero;
     }
 
     public function getIdGenero(){
-        return $this->idGenero
+        return $this->idGenero;
     }
 
     public function obtenerEstudiante(int $idEstudiante){
        if($this->idEstudiante > 0){
-            $this->setIdEstudiante($idEstudiante)
-            $resultado = $this->conexion('SELECT * From estudiante WHERE id_estudiante='.$this->idEstudiante.";");
+            $this->setIdEstudiante($idEstudiante);
+            $resultado = $this->conexion->run('SELECT * From estudiante WHERE id_estudiante='.$this->idEstudiante.";");
             $array = array("mensaje" =>"registros encontrados", "Valores" =>$resultado->fetch());
             return $array;
        }
@@ -56,9 +56,8 @@ class Estudiante{
        }
     }
 
-     public function obtenerEstudiantes(){
-        $this->setIdEstudiante($idEstudiante)
-        $resultado = $this->conexion('SELECT * From estudiante;');
+     public function obtenerEstudiantes(){       
+        $resultado = $this->conexion->run('SELECT * From estudiante;');
         $array = array("mensaje" =>"registros encontrados", "Valores" =>$resultado->fetch());
         return $array;
     }
@@ -70,7 +69,7 @@ class Estudiante{
                 "fecha_nac" => $fechaNacimiento,
                 "id_genero" => $idGenero
             );
-            $resultado = $this->conexion('INSERT INTO estudiante(fecha_nacimiento, id_genero)VALUES(:fecha_nac,:id_genero);',$parametros);
+            $resultado = $this->conexion->run('INSERT INTO estudiante(fecha_nacimiento, id_genero)VALUES(:fecha_nac,:id_genero);',$parametros);
             if($this->conexion->n > 0 and $this->conexion->id > 0){
                 $resultado = $this->obtenerEstudiante($this->conexion->id);
                 $array = array("mensaje" =>"registros encontrados", "Valores" =>$resultado[Valores]);
