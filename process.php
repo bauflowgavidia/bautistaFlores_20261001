@@ -3,9 +3,9 @@
 header('Access-Control-allow-Origin:*');
 header('Access-Control-allow-Headers: Origin, x-Requested-With, Content-Type, Accept, Access-Control-Request-Method');
 header('Access-Control-allow-Methods: GET, POST, OPTIONS, PUT, DELETE');
-header('Access-Control-Max-Age:1000:');
+header('Access-Control-Max-Age:1000');
 header('Access-Control-allow-Credentials: true');
-header('Allow: GET. POST, OPTIONS, PUT, DELETE');
+header('Allow: GET, POST, OPTIONS, PUT, DELETE');
 
 require('classes/estudiante.class.php');
 

@@ -58,7 +58,7 @@ class Estudiante{
 
      public function obtenerEstudiantes(){       
         $resultado = $this->conexion->run('SELECT * From estudiante;');
-        $array = array("mensaje" =>"registros encontrados", "Valores" =>$resultado->fetch());
+        $array = array("mensaje" =>"registros encontrados", "Valores" =>$resultado->fetchAll());
         return $array;
     }
 
@@ -72,7 +72,7 @@ class Estudiante{
             $resultado = $this->conexion->run('INSERT INTO estudiante(fecha_nacimiento, id_genero)VALUES(:fecha_nac,:id_genero);',$parametros);
             if($this->conexion->n > 0 and $this->conexion->id > 0){
                 $resultado = $this->obtenerEstudiante($this->conexion->id);
-                $array = array("mensaje" =>"registros encontrados", "Valores" =>$resultado[Valores]);
+                $array = array("mensaje" =>"registros encontrados", "Valores" =>$resultado["Valores"]);
                 return $array;
             }
             else{
